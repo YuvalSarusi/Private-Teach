@@ -39,11 +39,12 @@
             android:layout_gravity="center"
             android:gravity="center"
             />
-        <EditText
+        <TextView
             android:id="@+id/selectDateEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:gravity="center"
             />
     </LinearLayout>
 
@@ -70,11 +71,12 @@
                 android:layout_gravity="center"
                 />
 
-            <EditText
+            <TextView
                 android:id="@+id/selectStartTimeEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:gravity="center"
                 />
         </LinearLayout>
         <LinearLayout
@@ -95,14 +97,21 @@
                 android:layout_gravity="center"
                 />
 
-            <EditText
+            <TextView
                 android:id="@+id/selectEndTimeEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:gravity="center"
                 />
         </LinearLayout>
 
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
 
     </LinearLayout>
     <Button
@@ -114,5 +123,15 @@
         android:layout_gravity="right"
         android:text="Save Lesson"
         android:textSize="15dp"
+        />
+    <TextView
+        android:id="@+id/addLessonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/light_blue"
+        android:textSize="30dp"
+        android:text="back"
+        android:layout_gravity="left"
+        android:clickable="true"
         />
 </LinearLayout>

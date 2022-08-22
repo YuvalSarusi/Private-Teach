@@ -180,8 +180,71 @@ public class ServerConnection {
     }
 
     //student methods
-
-
+    public String createStudent(Student student, StringResponseListener stringResponseListener){
+        stringResponse = "";
+        String url = HTTP_REQUEST_ADDRESS+"/create-new-student";
+        StringRequest request  = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //need to do something
+                        //activate responseListener onResponse;
+                        stringResponse = response;
+                        stringResponseListener.onResponse(response);
+                    }
+                },
+                new Response.ErrorListener()  {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        stringResponseListener.onError("Error at connection");
+                        Log.e(SERVER_CONNECTION_TAG,"Error at connection to server");
+                        error.printStackTrace();
+                    }
+                }
+        )
+        {
+            //Override getParams that pass on the params to the server
+            @Override
+            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("username", student.getUsername());
+                params.put("token", student.getToken());
+                params.put("fullName", student.getFullName());
+                params.put("phoneNumber", student.getPhoneNumber());
+                params.put("email", student.getEmail());
+                return params;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        return stringResponse;
+    }
+    public String checkStudentExist(String username,String token, StringResponseListener stringResponseListener){
+        stringResponse = "";
+        String params = "?username="+username+"&token="+token;
+        String url = HTTP_REQUEST_ADDRESS+"/check-student-exist"+params;
+        StringRequest request  = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //need to do something
+                        //activate responseListener onResponse;
+                        stringResponse = response;
+                        stringResponseListener.onResponse(response);
+                        //Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener()  {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        stringResponseListener.onError("Error at connection");
+                        Log.e(SERVER_CONNECTION_TAG,"Error at connection to server");
+                        error.printStackTrace();
+                    }
+                }
+        );
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        return stringResponse;
+    }
     //lessons methods
     public String addLesson(Date startDate, Date endDate, String teacherToken, String studentToken, StringResponseListener stringResponseListener){
         stringResponse = "";
@@ -220,7 +283,6 @@ public class ServerConnection {
         };
         MySingleton.getInstance(context).addToRequestQueue(request);
         return stringResponse;
-
     }
     public JSONArray getTeacherFutureLessons(String teacherToken, JSONArrayResponseListener jsonArrayResponseListener){
         jsonArrayResponse = new JSONArray();

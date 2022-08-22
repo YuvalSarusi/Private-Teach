@@ -33,7 +33,14 @@ public class Student {
         this.email = email;
     }
 
-
+    public Student(String username, String password, String token, String fullName, String phoneNumber, String email) {
+        this.username = username;
+        this.password = password;
+        this.token = token;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
 
     public int getId() {
         return id;

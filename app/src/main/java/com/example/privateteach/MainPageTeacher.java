@@ -1,9 +1,7 @@
 package com.example.privateteach;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,7 +11,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,7 +29,7 @@ import Objects.Student;
 import Objects.Teacher;
 import Objects.TeacherLessonAdapter;
 
-public class MainPageTeacher extends AppCompatActivity {
+public class MainPageTeacher extends AppCompatActivity{
 
     private ServerConnection serverConnection;
 
@@ -48,7 +45,7 @@ public class MainPageTeacher extends AppCompatActivity {
     TeacherLessonAdapter futureLessonsAdapter;
 
     private String teacherToken;
-    private String username;
+    private String fullName;
     private JSONObject returnedTeacher;
 
     @Override
@@ -69,6 +66,12 @@ public class MainPageTeacher extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menuLogOut:
                 //log out - delete from shared preference
+                SharedPreferences sharedPreferences = getSharedPreferences(String.valueOf(R.string.sharedPrefName),MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("token","No User");
+                editor.commit();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.menuSettings:
                 //go to settings
@@ -101,8 +104,8 @@ public class MainPageTeacher extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 returnedTeacher = response;
                 try {
-                    username = returnedTeacher.getString("username");
-                    titleTextView.setText("Welcome, "+username);
+                    fullName = returnedTeacher.getString("fullName");
+                    titleTextView.setText("Welcome, "+ fullName);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e("Get Teacher Name","Error");
@@ -117,9 +120,10 @@ public class MainPageTeacher extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         //get lessons data from server and put it in list
         getLessonsData();
+
+
     }
     private void getLessonsData(){
         pastLessons = new ArrayList<>();

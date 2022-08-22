@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StudentSignUp"
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/signUp"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <EditText
+        android:id="@+id/studentSignUpUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signUpUsername"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/studentSignUpPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signUpPassword"
+        android:gravity="center"
+        android:inputType="textPassword"
+        />
+
+    <EditText
+        android:id="@+id/studentSignUpFullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signUpFullName"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/studentSignUpPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signUpPhone"
+        android:gravity="center"
+        android:inputType="phone"
+        />
+    <EditText
+        android:id="@+id/studentSignUpEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signUpEmail"
+        android:gravity="center"
+        android:inputType="textEmailAddress"
+        />
+
+    <Button
+        android:id="@+id/studentSingUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signUp"
+        android:backgroundTint="@color/light_blue"
+        android:layout_gravity="right"
+        android:layout_marginTop="30dp"
+        />
+
+
+</LinearLayout>

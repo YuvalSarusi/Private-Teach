@@ -4,13 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -29,11 +30,12 @@ public class AddLesson extends AppCompatActivity {
     private Button selectDateButton;
     private Button selectStartTimeButton;
     private Button selectEndTimeButton;
-    private EditText selectDateEditText;
-    private EditText selectStartTimeEditText;
-    private EditText selectEndTimeEditText;
+    private TextView selectDateTextView;
+    private TextView selectStartTimeTextView;
+    private TextView selectEndTimeTextView;
+    private TextView backTextView;
 
-    private int mYear,mMonth,mDay, mStartHour, mStartMinute, mEndHour, mEndMinute;
+    private int mYear,mMonth,mDay, mStartHour, mStartMinute;
 
     private Date startDate;
     private Date endDate;
@@ -52,12 +54,14 @@ public class AddLesson extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(String.valueOf(R.string.sharedPrefName),MODE_PRIVATE);
         teacherToken = sharedPreferences.getString("token","No User");
 
-        selectDateEditText = findViewById(R.id.selectDateEditText);
-        selectStartTimeEditText = findViewById(R.id.selectStartTimeEditText);
-        selectEndTimeEditText = findViewById(R.id.selectEndTimeEditText);
+        selectDateTextView = findViewById(R.id.selectDateEditText);
+        selectStartTimeTextView = findViewById(R.id.selectStartTimeEditText);
+        selectEndTimeTextView = findViewById(R.id.selectEndTimeEditText);
         selectDateButton = findViewById(R.id.selectDateButton);
         selectStartTimeButton = findViewById(R.id.selectStartTimeButton);
         selectEndTimeButton = findViewById(R.id.selectEndTimeButton);
+        backTextView = findViewById(R.id.addLessonBack);
+        saveLesson = findViewById(R.id.saveLesson);
 
         selectDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +76,7 @@ public class AddLesson extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 dateString = year+"-"+(month+1)+"-"+dayOfMonth;
-                                selectDateEditText.setText(dayOfMonth+"/"+(month+1)+"/"+year);
+                                selectDateTextView.setText(dayOfMonth+"/"+(month+1)+"/"+year);
                             }
                         },mYear,mMonth,mDay);
                 datePickerDialog.show();
@@ -89,10 +93,10 @@ public class AddLesson extends AppCompatActivity {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 startTimeString = hourOfDay+":"+minute;
-                                selectStartTimeEditText.setText(hourOfDay+":"+minute);
+                                selectStartTimeTextView.setText(hourOfDay+":"+minute);
                             }
                         }
-                        , mStartHour, mStartMinute, false);
+                        , mStartHour, mStartMinute, true);
                 timePickerDialog.show();
             }
         });
@@ -100,21 +104,20 @@ public class AddLesson extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Calendar calendar = Calendar.getInstance();
-                mEndHour = calendar.get(Calendar.HOUR);
-                mEndMinute = calendar.get(Calendar.MINUTE);
+                mStartHour = calendar.get(Calendar.HOUR);
+                mStartMinute = calendar.get(Calendar.MINUTE);
                 TimePickerDialog timePickerDialog = new TimePickerDialog(AddLesson.this,
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 endTimeString = hourOfDay+":"+minute;
-                                selectEndTimeEditText.setText(hourOfDay+":"+minute);
+                                selectEndTimeTextView.setText(hourOfDay+":"+minute);
                             }
                         }
-                        , mStartHour, mStartMinute, false);
+                        , mStartHour, mStartMinute, true);
                 timePickerDialog.show();
             }
         });
-        saveLesson = findViewById(R.id.saveLesson);
         saveLesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,23 +129,44 @@ public class AddLesson extends AppCompatActivity {
                     Log.e("Lesson Date","Format Exception");
                     e.printStackTrace();
                 }
-                if (startDate.before(endDate)){
-                    ServerConnection serverConnection = new ServerConnection(AddLesson.this);
-                    serverConnection.addLesson(startDate, endDate, teacherToken, "", new ServerConnection.StringResponseListener() {
-                        @Override
-                        public void onError(String message) {
-                            Log.e("Save Lesson", message);
-                        }
+                ServerConnection serverConnection = new ServerConnection(AddLesson.this);
+                serverConnection.addLesson(startDate, endDate, teacherToken, "", new ServerConnection.StringResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        Log.e("Save Lesson", message);
+                    }
 
-                        @Override
-                        public void onResponse(String response) {
-                            Log.i("Save Lesson", "Response from server: "+response);
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("Save Lesson", "Response from server: "+response);
+                        if (response == null){
+                            Toast.makeText(AddLesson.this,"Error. Try Again", Toast.LENGTH_SHORT).show();
                         }
-                    });
-                }
-                else{
-                    Toast.makeText(AddLesson.this,"Choose End Time after Start time",Toast.LENGTH_LONG).show();
-                }
+                        else if (response.equals("EarlierDate")){
+                            Toast.makeText(AddLesson.this,"Start Date can't be later then end date. Choose another End Date", Toast.LENGTH_LONG).show();
+                        }
+                        else if(response.equals("LaterDate")){
+                            Toast.makeText(AddLesson.this,"Start Date can't be earlier then current date. Choose another Start Date", Toast.LENGTH_LONG).show();
+                        }
+                        else if (response.equals("success")){
+                            Intent intent = new Intent(AddLesson.this, MainPageTeacher.class);
+                            startActivity(intent);
+                        }
+                        else if (response.equals("MiddleExist")){
+                            Toast.makeText(AddLesson.this,"There is an exist lesson between your start date and end date", Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            Toast.makeText(AddLesson.this,"You Have exist lesson on this hours. Change this date: "+response, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+            }
+        });
+        backTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddLesson.this,MainPageTeacher.class);
+                startActivity(intent);
             }
         });
     }
