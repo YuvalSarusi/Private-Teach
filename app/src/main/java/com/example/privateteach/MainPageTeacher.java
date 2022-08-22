@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -54,6 +57,26 @@ public class MainPageTeacher extends AppCompatActivity {
         setContentView(R.layout.activity_main_page_teacher);
         init();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.teacher_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.menuLogOut:
+                //log out - delete from shared preference
+                return true;
+            case R.id.menuSettings:
+                //go to settings
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     private void init(){
         returnedTeacher = new JSONObject();
@@ -98,7 +121,6 @@ public class MainPageTeacher extends AppCompatActivity {
         //get lessons data from server and put it in list
         getLessonsData();
     }
-
     private void getLessonsData(){
         pastLessons = new ArrayList<>();
         futureLessons = new ArrayList<>();
@@ -141,7 +163,6 @@ public class MainPageTeacher extends AppCompatActivity {
             }
         });
     }
-
     private Lesson convertJSONObjectToLesson (JSONObject jsonObject){
         Lesson lesson = null;
         try {

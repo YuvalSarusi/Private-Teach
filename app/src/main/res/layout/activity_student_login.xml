@@ -4,6 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StudentLogin">
+    tools:context=".StudentLogin"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    >
+    <TextView
+        android:id="@+id/loginTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_marginBottom="160dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <EditText
+        android:id="@+id/studentUsernameLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signUpUsername"
+        android:gravity="center"
+        />
+    <EditText
+        android:id="@+id/studentPasswordLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signUpPassword"
+        android:gravity="center"
+        android:inputType="textPassword"
+        />
+
+    <Button
+        android:id="@+id/studentLoginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:backgroundTint="@color/light_blue"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:layout_gravity="right"
+        />
+    <TextView
+        android:id="@+id/studentSignUpText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newAccountText"
+        android:layout_marginTop="150dp"
+        android:linksClickable="true"
+        android:layout_gravity="right"
+        android:gravity="center"
+        />
+
 
 </LinearLayout>
