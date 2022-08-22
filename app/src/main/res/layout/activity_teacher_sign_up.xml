@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TeacherSignUp"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/signUp"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <EditText
+        android:id="@+id/teacherSignUpUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signUpUsername"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/teacherSignUpPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signUpPassword"
+        android:gravity="center"
+        android:inputType="textPassword"
+        />
+
+    <EditText
+        android:id="@+id/teacherSignUpFullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signUpFullName"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/teacherSignUpPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signUpPhone"
+        android:gravity="center"
+        android:inputType="phone"
+        />
+    <EditText
+        android:id="@+id/teacherSignUpEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signUpEmail"
+        android:gravity="center"
+        android:inputType="textEmailAddress"
+        />
+
+    <EditText
+        android:id="@+id/teacherSignUpPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/signUpPrice"
+        android:gravity="center"
+        android:inputType="number"
+        />
+
+    <Spinner
+        android:id="@+id/teacherSubjectSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        />
+
+    <Button
+        android:id="@+id/teacherSingUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signUp"
+        android:backgroundTint="@color/light_blue"
+        android:layout_gravity="right"
+        android:layout_marginTop="30dp"
+        />
+
+</LinearLayout>

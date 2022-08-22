@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Private Teach</string>
+
+    <string name="welcomeTitle">Welcome! \n\n What Are You?</string>
+    <string name="teacherTitle">I Am A Teacher</string>
+    <string name="studentTitle">I Am A Student</string>
+
+    <string name="login">Login</string>
+    <string name="newAccountText">Don\'t have an account? \nsign up here</string>
+
+    <string name="signUp">Sign Up</string>
+    <string name="signUpUsername">Enter Your Username</string>
+    <string name="signUpPassword">Enter Your Password</string>
+    <string name="signUpFullName">Enter Your Full Name</string>
+    <string name="signUpPhone">Enter Your Phone Number</string>
+    <string name="signUpEmail">Enter Your Email</string>
+    <string name="signUpPrice">Enter Fare(₪/hour)</string>
+
+    <string name="teacherHomeTitle">Welcome</string>
+
+    <string-array name="subjects">
+        <item>Math</item>
+        <item>English</item>
+        <item>Hebrew</item>
+        <item>Programing</item>
+        <item>Physics</item>
+    </string-array>
+
+    <string name="sharedPrefName">tokenPref</string>
+</resources>
