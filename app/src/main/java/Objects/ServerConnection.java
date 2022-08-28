@@ -245,6 +245,7 @@ public class ServerConnection {
         MySingleton.getInstance(context).addToRequestQueue(request);
         return stringResponse;
     }
+
     //lessons methods
     public String addLesson(Date startDate, Date endDate, String teacherToken, String studentToken, StringResponseListener stringResponseListener){
         stringResponse = "";
@@ -338,4 +339,57 @@ public class ServerConnection {
         MySingleton.getInstance(context).addToRequestQueue(request);
         return this.jsonArrayResponse;
     }
+    public String getHighestPrice(StringResponseListener stringResponseListener){
+        stringResponse = "";
+        String url = HTTP_REQUEST_ADDRESS+"/get-highest-price";
+        StringRequest request  = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //need to do something
+                        //activate responseListener onResponse;
+                        stringResponse = response;
+                        stringResponseListener.onResponse(response);
+                        //Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener()  {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        stringResponseListener.onError("Error at connection");
+                        Log.e(SERVER_CONNECTION_TAG,"Error at connection to server");
+                        error.printStackTrace();
+                    }
+                }
+        );
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        return stringResponse;
+    }
+    public String getLowestPrice(StringResponseListener stringResponseListener){
+        stringResponse = "";
+        String url = HTTP_REQUEST_ADDRESS+"/get-lowest-price";
+        StringRequest request  = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //need to do something
+                        //activate responseListener onResponse;
+                        stringResponse = response;
+                        stringResponseListener.onResponse(response);
+                        //Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener()  {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        stringResponseListener.onError("Error at connection");
+                        Log.e(SERVER_CONNECTION_TAG,"Error at connection to server");
+                        error.printStackTrace();
+                    }
+                }
+        );
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        return stringResponse;
+    }
+
 }

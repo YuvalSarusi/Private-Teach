@@ -5,7 +5,11 @@
     <string name="teacherTitle">I Am A Teacher</string>
     <string name="studentTitle">I Am A Student</string>
 
+    <string name="loginTeacher">Login As Teacher</string>
+    <string name="loginStudent">Login As Student</string>
     <string name="login">Login</string>
+
+
     <string name="newAccountText">Don\'t have an account? \nsign up here</string>
 
     <string name="signUp">Sign Up</string>

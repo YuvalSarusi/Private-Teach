@@ -15,6 +15,8 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
+
 import Objects.ServerConnection;
 import Objects.Teacher;
 import utils.Utils;
@@ -54,21 +56,21 @@ public class TeacherSignUp extends AppCompatActivity {
         priceEditText = findViewById(R.id.teacherSignUpPrice);
 
         subjectSpinner = findViewById(R.id.teacherSubjectSpinner);
-        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(
-                this,R.array.subjects, android.R.layout.simple_spinner_item
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.subjects)
         );
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         subjectSpinner.setAdapter(arrayAdapter);
         subjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-             @Override
-             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                 selectedSubject = arrayAdapter.getItem(position).toString();
-             }
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedSubject = arrayAdapter.getItem(position).toString();
+            }
 
-             @Override
-             public void onNothingSelected(AdapterView<?> parent) {
-                 //there is a default value
-             }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //there is a default value
+            }
         });
 
         singUpButton = findViewById(R.id.teacherSingUpButton);

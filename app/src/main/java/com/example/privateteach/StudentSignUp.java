@@ -85,7 +85,7 @@ public class StudentSignUp extends AppCompatActivity {
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("token",response);
                                 editor.commit();
-                                Intent intent = new Intent(StudentSignUp.this,MainPageTeacher.class);
+                                Intent intent = new Intent(StudentSignUp.this,MainPageStudent.class);
                                 startActivity(intent);
                             }
                         }

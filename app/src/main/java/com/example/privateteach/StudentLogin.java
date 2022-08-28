@@ -69,7 +69,7 @@ public class StudentLogin extends AppCompatActivity {
                                     Toast.makeText(StudentLogin.this,"Wrong password. try again",Toast.LENGTH_LONG).show();
                                 }
                                 else{
-                                    Intent intent = new Intent(StudentLogin.this, MainPageTeacher.class);
+                                    Intent intent = new Intent(StudentLogin.this, MainPageStudent.class);
                                     Log.i("Student Login", "success, "+response);
                                     SharedPreferences sharedPreferences = getSharedPreferences(String.valueOf(R.string.sharedPrefName),MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
