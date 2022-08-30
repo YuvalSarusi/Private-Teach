@@ -1,7 +1,10 @@
 package Objects;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Lesson {
@@ -71,5 +74,36 @@ public class Lesson {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public static Lesson convertJSONObjectToLesson(JSONObject jsonObject){
+        Lesson lesson = null;
+        try {
+            //get String start & end date
+            String startDateString = jsonObject.getString("startDateString");
+            String endDateString = jsonObject.getString("endDateString");
+            //create date format to insert Date object to Lesson object
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Student student;
+            //check if the student value at the JSONObject is null or not. can't access to null value at json
+            if (jsonObject.isNull("student")) {
+                //if the value is null, student defined to be null
+                student = null;
+            } else {
+                student = Student.convertJSONObjectToStudent(jsonObject.getJSONObject("student"));
+            }
+            //create Lesson object with the json values
+            lesson = new Lesson(
+                    simpleDateFormat.parse(startDateString),
+                    simpleDateFormat.parse(endDateString),
+                    Teacher.convertJSONObjectToTeacher(jsonObject.getJSONObject("teacher")),
+                    student
+            );
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return lesson;
     }
 }

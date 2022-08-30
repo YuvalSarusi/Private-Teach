@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +38,8 @@ public class TeacherLogin extends AppCompatActivity {
     private EditText usernameEditText;
     private EditText passwordEditText;
 
+    String username;
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +48,9 @@ public class TeacherLogin extends AppCompatActivity {
         init();
     }
     private void init(){
-        usernameEditText = findViewById(R.id.teacherUsernameLogin);
-        passwordEditText = findViewById(R.id.teacherPasswordLogin);
-
+        setLogin();
+        setEditTexts();
         signUp = findViewById(R.id.teacherSignUpText);
-        login = findViewById(R.id.teacherLoginButton);
-
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,14 +59,16 @@ public class TeacherLogin extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    private void setLogin(){
+        login = findViewById(R.id.teacherLoginButton);
+        login.setEnabled(false);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //login
-                TextView textView = findViewById(R.id.loginTitle);
-                //textView.setText("response");
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
                 String token = Utils.createHash(username,password);
                 ServerConnection serverConnection = new ServerConnection(TeacherLogin.this);
                 serverConnection.checkTeacherExist(username, token,
@@ -89,6 +92,7 @@ public class TeacherLogin extends AppCompatActivity {
                                     SharedPreferences sharedPreferences = getSharedPreferences(String.valueOf(R.string.sharedPrefName),MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("token",response);
+                                    editor.putString("type","teacher");
                                     editor.commit();
                                     startActivity(intent);
                                 }
@@ -96,8 +100,55 @@ public class TeacherLogin extends AppCompatActivity {
                         }
 
                 );
-                }
+            }
         });
+    }
+    private void setEditTexts(){
+        usernameEditText = findViewById(R.id.teacherUsernameLogin);
+        passwordEditText = findViewById(R.id.teacherPasswordLogin);
+
+        usernameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                username = usernameEditText.getText().toString();
+                login.setEnabled(TeacherLogin.this.checkLegalData());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        passwordEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                password = passwordEditText.getText().toString();
+                login.setEnabled(TeacherLogin.this.checkLegalData());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+    private boolean checkLegalData(){
+        boolean answer = false;
+        if (username != null && password != null){
+            answer = !username.equals("") && !password.equals("");
+        }
+        return answer;
     }
 
 }

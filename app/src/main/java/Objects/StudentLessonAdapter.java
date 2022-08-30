@@ -12,6 +12,9 @@ import androidx.annotation.Nullable;
 
 import com.example.privateteach.R;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class StudentLessonAdapter extends ArrayAdapter<Lesson> {
@@ -38,10 +41,15 @@ public class StudentLessonAdapter extends ArrayAdapter<Lesson> {
         TextView nameTextView = currentItemView.findViewById(R.id.lessonListStudentName);
         TextView subjectTextView = currentItemView.findViewById(R.id.lessonListStudentSubject);
         TextView priceTextView = currentItemView.findViewById(R.id.lessonListStudentPrice);
+        TextView startDateTextView = currentItemView.findViewById(R.id.lessonListStudentStart);
+        TextView endDateTextView = currentItemView.findViewById(R.id.lessonListStudentEnd);
 
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         nameTextView.setText(lesson.getTeacher().getUsername());
         subjectTextView.setText(lesson.getTeacher().getSubject());
-        priceTextView.setText(lesson.getTeacher().getPrice());
+        priceTextView.setText(String.valueOf(lesson.getTeacher().getPrice()));
+        startDateTextView.setText("Start Date\n"+format.format(lesson.getStartDate()));
+        endDateTextView.setText("End Date\n"+format.format(lesson.getEndDate()));
         // then return the recyclable view
         return currentItemView;
     }

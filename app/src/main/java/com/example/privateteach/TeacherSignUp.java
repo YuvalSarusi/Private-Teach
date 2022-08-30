@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.service.autofill.RegexValidator;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +19,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Objects.ServerConnection;
 import Objects.Teacher;
@@ -48,13 +53,11 @@ public class TeacherSignUp extends AppCompatActivity {
     }
 
     private void init(){
-        usernameEditText = findViewById(R.id.teacherSignUpUsername);
-        passwordEditText = findViewById(R.id.teacherSignUpPassword);
-        fullNameEditText = findViewById(R.id.teacherSignUpFullName);
-        phoneNumberEditText = findViewById(R.id.teacherSignUpPhone);
-        emailEditText = findViewById(R.id.teacherSignUpEmail);
-        priceEditText = findViewById(R.id.teacherSignUpPrice);
-
+        setButton();
+        setEditTexts();
+        setSpinner();
+    }
+    private void setSpinner(){
         subjectSpinner = findViewById(R.id.teacherSubjectSpinner);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.subjects)
@@ -72,24 +75,138 @@ public class TeacherSignUp extends AppCompatActivity {
                 //there is a default value
             }
         });
+    }
+    private void setEditTexts(){
+        usernameEditText = findViewById(R.id.teacherSignUpUsername);
+        passwordEditText = findViewById(R.id.teacherSignUpPassword);
+        fullNameEditText = findViewById(R.id.teacherSignUpFullName);
+        phoneNumberEditText = findViewById(R.id.teacherSignUpPhone);
+        emailEditText = findViewById(R.id.teacherSignUpEmail);
+        priceEditText = findViewById(R.id.teacherSignUpPrice);
 
+        usernameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                username = usernameEditText.getText().toString();
+                singUpButton.setEnabled(TeacherSignUp.this.checkLegalData());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        passwordEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                password = passwordEditText.getText().toString();
+                singUpButton.setEnabled(TeacherSignUp.this.checkLegalData());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        fullNameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                fullName = fullNameEditText.getText().toString();
+                singUpButton.setEnabled(TeacherSignUp.this.checkLegalData());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        phoneNumberEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                phoneNumber = phoneNumberEditText.getText().toString();
+                singUpButton.setEnabled(TeacherSignUp.this.checkLegalData());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        emailEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                email = emailEditText.getText().toString();
+                //singUpButton.setEnabled(TeacherSignUp.this.checkLegalData());
+                singUpButton.setEnabled(TeacherSignUp.this.checkLegalData());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        priceEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String a = priceEditText.getText().toString();
+                if (!a.equals("")){
+                    try{
+                        price = Integer.parseInt(priceEditText.getText().toString());
+                    }
+                    catch (NumberFormatException exception){
+                        Toast.makeText(TeacherSignUp.this,"Format Exception. Enter a number Fare",Toast.LENGTH_LONG).show();
+                    }
+                }
+                else{
+                    price =0;
+                }
+                singUpButton.setEnabled(TeacherSignUp.this.checkLegalData());
+            }
+        });
+    }
+    private void setButton() {
         singUpButton = findViewById(R.id.teacherSingUpButton);
+        singUpButton.setEnabled(false);
         singUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //create new teacher when click on the button
-                username = usernameEditText.getText().toString();
-                password = passwordEditText.getText().toString();
-                fullName = fullNameEditText.getText().toString();
-                phoneNumber = phoneNumberEditText.getText().toString();
-                email = emailEditText.getText().toString();
                 String token = Utils.createHash(username,password);
-                try{
-                    price = Integer.parseInt(priceEditText.getText().toString());
-                }
-                catch (NumberFormatException exception){
-                    Toast.makeText(TeacherSignUp.this,"Format Exception. Enter a number Fare",Toast.LENGTH_LONG).show();
-                }
                 Teacher teacher = new Teacher(username,password,token,fullName,phoneNumber,email,price,selectedSubject);
                 ServerConnection serverConnection = new ServerConnection(TeacherSignUp.this);
                 serverConnection.createTeacher(teacher, new ServerConnection.StringResponseListener() {
@@ -123,4 +240,24 @@ public class TeacherSignUp extends AppCompatActivity {
             }
         });
     }
+
+    private boolean checkLegalData(){
+        boolean answer = false;
+        if (phoneNumber != null && email != null && username != null && password != null && fullName != null){
+            Pattern phoneNumberPattern = Pattern.compile("^05\\d([-]?)\\d{7}$");
+            Pattern emailPattern = Pattern.compile("^(.+)@(.+)$");
+            Matcher phoneMatcher = phoneNumberPattern.matcher(phoneNumber);
+            Matcher emailMatcher = emailPattern.matcher(email);
+            answer = emailMatcher.matches() &&
+                    phoneMatcher.matches() &&
+                    !username.equals("")&&
+                    !password.equals("")&&
+                    !fullName.equals("") &&
+                    price != 0
+            ;
+        }
+        return answer;
+    }
+
+
 }

@@ -27,12 +27,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         teacherToken = sharedPreferences.getString("token","No User");
         //check if user already logged in and auto-login if does
         if(!teacherToken.equals("No User")){
-            Intent intent = new Intent(this, MainPageTeacher.class);
-            startActivity(intent);
+            String type = sharedPreferences.getString("type","");
+            if (type.equals("teacher")){
+                Intent intent = new Intent(this, MainPageTeacher.class);
+                startActivity(intent);
+            }
+            else if (type.equals("student")){
+                Intent intent = new Intent(this, MainPageStudent.class);
+                startActivity(intent);
+            }
         }
         teacherButton = findViewById(R.id.teacherButton);
         studentButton = findViewById(R.id.studentButton);
-
         teacherButton.setOnClickListener(this);
         studentButton.setOnClickListener(this);
 

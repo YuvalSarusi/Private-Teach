@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/signUpFullName"
         android:gravity="center"
+        android:inputType="textPersonName|textCapWords"
         />
 
     <EditText

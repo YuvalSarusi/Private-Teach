@@ -25,10 +25,38 @@
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
         />
-    <SeekBar
-        android:id="@+id/studentFilterSeekBar"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:textSize="25dp"
+            android:text="Max Price: "
+            />
+        <EditText
+            android:id="@+id/filterEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:inputType="numberDecimal"
+            />
+    </LinearLayout>
+    <Button
+        android:id="@+id/filterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/light_blue"
+        />
+    <ListView
+        android:id="@+id/studentFilterListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
-
 </LinearLayout>

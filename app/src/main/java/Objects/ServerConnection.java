@@ -29,7 +29,7 @@ public class ServerConnection {
     private String stringResponse; //handle returned String data. define it at the beginning of the methods with ""
 
     private final String SERVER_CONNECTION_TAG = "Server Connection";
-    private final String SERVER_IP = "10.0.0.23";
+    private final String SERVER_IP = "10.0.0.8";
     private final String SERVER_PORT = "9000";
     private final String HTTP_REQUEST_ADDRESS = "http://"+SERVER_IP+":"+SERVER_PORT;
 
@@ -390,6 +390,49 @@ public class ServerConnection {
         );
         MySingleton.getInstance(context).addToRequestQueue(request);
         return stringResponse;
+    }
+    public JSONArray getFilteredLesson(String subject, String maxPrice, JSONArrayResponseListener jsonArrayResponseListener){
+        this.jsonArrayResponse = new JSONArray();
+        String url;
+        if (subject.equals("All") && maxPrice.equals("")){
+            url = HTTP_REQUEST_ADDRESS+"/get-all-available-lessons";
+        }
+        else if (!subject.equals("All") && maxPrice.equals("")){
+            String params = "?subject="+subject;
+            url = HTTP_REQUEST_ADDRESS+"/get-subject-filtered-available-lessons"+params;
+        }
+        else if (subject.equals("All") && !maxPrice.equals("")){
+            String params = "?price="+maxPrice;
+            url = HTTP_REQUEST_ADDRESS+"/get-price-filtered-available-lessons"+params;
+        }
+        else{
+            String params = "?subject="+subject+"&price="+maxPrice;
+            url = HTTP_REQUEST_ADDRESS+"/get-filtered-available-lessons"+params;
+        }
+        JsonArrayRequest request  = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        //need to do something
+                        jsonArrayResponse = response;
+                        jsonArrayResponseListener.onResponse(jsonArrayResponse);
+                        Log.i(SERVER_CONNECTION_TAG, "Get Filtered Lessons");
+                        //Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener()  {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        jsonArrayResponseListener.onError("Error at connection");
+                        Log.e(SERVER_CONNECTION_TAG,"Error at connection to server");
+                        error.printStackTrace();
+                    }
+                }
+        );
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        return this.jsonArrayResponse;
+
+
     }
 
 }

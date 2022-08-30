@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/teacherMenuSettings"
+        android:id="@+id/studentMenuSettings"
         android:title="Settings"
         />
     <item
-        android:id="@+id/teacherMenuLogOut"
+        android:id="@+id/studentMenuLogOut"
         android:title="Log Out"
         />
 </menu>

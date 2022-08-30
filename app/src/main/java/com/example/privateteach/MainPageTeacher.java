@@ -64,16 +64,16 @@ public class MainPageTeacher extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.menuLogOut:
+            case R.id.teacherMenuLogOut:
                 //log out - delete from shared preference
                 SharedPreferences sharedPreferences = getSharedPreferences(String.valueOf(R.string.sharedPrefName),MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("token","No User");
+                editor.clear();
                 editor.commit();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.menuSettings:
+            case R.id.teacherMenuSettings:
                 //go to settings
                 return true;
             default:
@@ -122,8 +122,6 @@ public class MainPageTeacher extends AppCompatActivity{
         });
         //get lessons data from server and put it in list
         getLessonsData();
-
-
     }
     private void getLessonsData(){
         pastLessons = new ArrayList<>();
@@ -137,7 +135,7 @@ public class MainPageTeacher extends AppCompatActivity{
             public void onResponse(JSONArray response) {
                 for (int i = 0; i<response.length(); i++){
                     try {
-                        pastLessons.add(convertJSONObjectToLesson(response.getJSONObject(i)));
+                        pastLessons.add(Lesson.convertJSONObjectToLesson(response.getJSONObject(i)));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -156,7 +154,7 @@ public class MainPageTeacher extends AppCompatActivity{
             public void onResponse(JSONArray response) {
                 for (int i = 0; i<response.length(); i++) {
                     try {
-                        futureLessons.add(convertJSONObjectToLesson(response.getJSONObject(i)));
+                        futureLessons.add(Lesson.convertJSONObjectToLesson(response.getJSONObject(i)));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -167,34 +165,5 @@ public class MainPageTeacher extends AppCompatActivity{
             }
         });
     }
-    private Lesson convertJSONObjectToLesson (JSONObject jsonObject){
-        Lesson lesson = null;
-        try {
-            //get String start & end date
-            String startDateString = jsonObject.getString("startDateString");
-            String endDateString = jsonObject.getString("endDateString");
-            //create date format to insert Date object to Lesson object
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            Student student;
-            //check if the student value at the JSONObject is null or not. can't access to null value at json
-            if (jsonObject.isNull("student")) {
-                //if the value is null, student defined to be null
-                student = null;
-            } else {
-                student = Student.convertJSONObjectToStudent(jsonObject.getJSONObject("student"));
-            }
-            //create Lesson object with the json values
-            lesson = new Lesson(
-                    simpleDateFormat.parse(startDateString),
-                    simpleDateFormat.parse(endDateString),
-                    Teacher.convertJSONObjectToTeacher(jsonObject.getJSONObject("teacher")),
-                    student
-            );
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return lesson;
-    }
+
 }

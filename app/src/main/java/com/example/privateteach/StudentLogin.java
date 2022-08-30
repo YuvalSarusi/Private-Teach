@@ -5,12 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Objects.ServerConnection;
 import utils.Utils;
@@ -22,6 +27,9 @@ public class StudentLogin extends AppCompatActivity {
     private EditText usernameEditText;
     private EditText passwordEditText;
 
+    private String username;
+    private String password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +37,9 @@ public class StudentLogin extends AppCompatActivity {
         init();
     }
     private void init(){
-        usernameEditText = findViewById(R.id.studentUsernameLogin);
-        passwordEditText = findViewById(R.id.studentPasswordLogin);
-
+        setLogin();
+        setEditTexts();
         signUp = findViewById(R.id.studentSignUpText);
-        login = findViewById(R.id.studentLoginButton);
-
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,14 +48,56 @@ public class StudentLogin extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void setEditTexts(){
+        usernameEditText = findViewById(R.id.studentUsernameLogin);
+        passwordEditText = findViewById(R.id.studentPasswordLogin);
+
+        usernameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                username = usernameEditText.getText().toString();
+                login.setEnabled(StudentLogin.this.checkLegalData());
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        passwordEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                password = passwordEditText.getText().toString();
+                login.setEnabled(StudentLogin.this.checkLegalData());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+    private void setLogin(){
+        login = findViewById(R.id.studentLoginButton);
+        login.setEnabled(false);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //login
                 TextView textView = findViewById(R.id.loginTitle);
-                //textView.setText("response");
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
                 String token = Utils.createHash(username,password);
                 ServerConnection serverConnection = new ServerConnection(StudentLogin.this);
                 serverConnection.checkStudentExist(username, token,
@@ -74,6 +121,7 @@ public class StudentLogin extends AppCompatActivity {
                                     SharedPreferences sharedPreferences = getSharedPreferences(String.valueOf(R.string.sharedPrefName),MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("token",response);
+                                    editor.putString("type","student");
                                     editor.commit();
                                     startActivity(intent);
                                 }
@@ -83,5 +131,13 @@ public class StudentLogin extends AppCompatActivity {
                 );
             }
         });
+    }
+
+    private boolean checkLegalData(){
+        boolean answer = false;
+        if (username != null && password != null){
+            answer = !username.equals("") && !password.equals("");
+        }
+        return answer;
     }
 }
