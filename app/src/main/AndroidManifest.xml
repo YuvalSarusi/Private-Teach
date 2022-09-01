@@ -13,6 +13,9 @@
         android:theme="@style/Theme.PrivateTeach"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".SearchTeacher"
+            android:exported="false" />
+        <activity
             android:name=".MainPageStudent"
             android:exported="false" />
         <activity

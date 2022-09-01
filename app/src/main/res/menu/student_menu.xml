@@ -3,9 +3,16 @@
     <item
         android:id="@+id/studentMenuSettings"
         android:title="Settings"
+        android:orderInCategory="1"
+        />
+    <item
+        android:id="@+id/studentMenuSearch"
+        android:title="Search Teacher"
+        android:orderInCategory="2"
         />
     <item
         android:id="@+id/studentMenuLogOut"
         android:title="Log Out"
+        android:orderInCategory="3"
         />
 </menu>

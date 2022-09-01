@@ -151,7 +151,7 @@ public class ServerConnection {
         return stringResponse;
 
     }
-    public  JSONObject getTeacherByToken(String token, JSONObjectResponseListener jsonObjectResponseListener){
+    public JSONObject getTeacherByToken(String token, JSONObjectResponseListener jsonObjectResponseListener){
         jsonObjectResponse = new JSONObject();
         String params = "?token="+token;
         String url = HTTP_REQUEST_ADDRESS+"/get-teacher-by-token"+params;
@@ -177,6 +177,33 @@ public class ServerConnection {
         );
         MySingleton.getInstance(context).addToRequestQueue(request);
         return this.jsonObjectResponse;
+    }
+    public JSONArray getFilterTeacher(String username, String subject, String price, JSONArrayResponseListener jsonArrayResponseListener){
+        jsonArrayResponse = new JSONArray();
+        String params = "?username="+username+"&subject="+subject+"&price="+price;
+        String url = HTTP_REQUEST_ADDRESS+"/get-filter-teacher"+params;
+        JsonArrayRequest request  = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        //need to do something
+                        jsonArrayResponse = response;
+                        jsonArrayResponseListener.onResponse(jsonArrayResponse);
+                        Log.i(SERVER_CONNECTION_TAG, "Get Filter Teachers");
+                        //Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener()  {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        jsonArrayResponseListener.onError("Error at connection");
+                        Log.e(SERVER_CONNECTION_TAG,"Error at connection to server");
+                        error.printStackTrace();
+                    }
+                }
+        );
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        return this.jsonArrayResponse;
     }
 
     //student methods

@@ -67,7 +67,7 @@ public class StudentSignUp extends AppCompatActivity {
                 phoneNumber = phoneNumberEditText.getText().toString();
                 email = emailEditText.getText().toString();
                 String token = Utils.createHash(username,password);
-                Student student = new Student(username,password,token,fullName,phoneNumber,email);
+                Student student = new Student(username,token,fullName,phoneNumber,email);
                 ServerConnection serverConnection = new ServerConnection(StudentSignUp.this);
                 serverConnection.createStudent(student, new ServerConnection.StringResponseListener() {
                     @Override

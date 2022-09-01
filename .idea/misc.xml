@@ -12,12 +12,15 @@
         <entry key="..\:/Android/Projects/PrivateTeach/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
         <entry key="..\:/Android/Projects/PrivateTeach/app/src/main/res/layout/activity_main_page_student.xml" value="0.19572649572649573" />
         <entry key="..\:/Android/Projects/PrivateTeach/app/src/main/res/layout/activity_main_page_teacher.xml" value="0.1643192488262911" />
+        <entry key="..\:/Android/Projects/PrivateTeach/app/src/main/res/layout/activity_search_teacher.xml" value="0.20854700854700856" />
         <entry key="..\:/Android/Projects/PrivateTeach/app/src/main/res/layout/activity_student_login.xml" value="0.20854700854700856" />
         <entry key="..\:/Android/Projects/PrivateTeach/app/src/main/res/layout/activity_student_sign_up.xml" value="0.20854700854700856" />
         <entry key="..\:/Android/Projects/PrivateTeach/app/src/main/res/layout/activity_teacher_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Android/Projects/PrivateTeach/app/src/main/res/layout/activity_teacher_sign_up.xml" value="0.25416666666666665" />
         <entry key="..\:/Android/Projects/PrivateTeach/app/src/main/res/layout/lesson_list_student.xml" value="0.10461956521739131" />
         <entry key="..\:/Android/Projects/PrivateTeach/app/src/main/res/layout/lesson_list_teacher.xml" value="0.20854700854700856" />
+        <entry key="..\:/Android/Projects/PrivateTeach/app/src/main/res/layout/teacher_list_item.xml" value="0.20854700854700856" />
+        <entry key="..\:/Android/Projects/PrivateTeach/app/src/main/res/layout/teacher_search_layout.xml" value="0.2" />
         <entry key="..\:/Android/Projects/PrivateTeach/app/src/main/res/menu/student_menu.xml" value="0.1848101265822785" />
         <entry key="..\:/Android/Projects/PrivateTeach/app/src/main/res/menu/teacher_menu.xml" value="0.20854700854700856" />
       </map>
