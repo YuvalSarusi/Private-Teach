@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LessonDisplayStudent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    >
+
+    <TextView
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="40dp"
+        android:id="@+id/lessonDisplayStudentUsername"
+        android:layout_width= "match_parent"
+        android:layout_height="wrap_content"
+        android:text="Teacher Username"
+        android:textSize="30dp"
+        android:gravity="center"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:id="@+id/lessonDisplayStudentStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="Start Date"
+            android:gravity="center"
+            android:layout_weight="5"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:id="@+id/lessonDisplayStudentEnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="End Date"
+            android:gravity="center"
+            android:layout_weight="5"
+            android:layout_marginLeft="10dp"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="10dp"
+        >
+        <TextView
+            android:id="@+id/lessonDisplayStudentPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="Price"
+            android:gravity="center"
+            android:layout_weight="5"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+            android:id="@+id/lessonDisplayStudentSubject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="Subject"
+            android:gravity="center"
+            android:layout_weight="5"
+            android:layout_marginLeft="10dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="50dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Do You Want to Sign to this Lesson?"
+            android:gravity="center"
+            android:layout_weight="5"
+            />
+       <Button
+           android:id="@+id/lessonDisplayStudentButton"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_weight="5"
+           android:gravity="center"
+           android:layout_gravity="center"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+           android:text="Sign to Lesson"
+           />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/lessonDisplayStudentTeacher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Teacher"
+        android:layout_margin="20dp"
+        android:textSize="20dp"
+        android:clickable="true"
+        />
+</LinearLayout>

@@ -461,5 +461,67 @@ public class ServerConnection {
 
 
     }
-
+    public JSONObject getLessonById(int id, JSONObjectResponseListener jsonObjectResponseListener){
+        jsonObjectResponse = new JSONObject();
+        String params = "?id="+id;
+        String url = HTTP_REQUEST_ADDRESS+"/get-lesson-by-id"+params;
+        JsonObjectRequest request  = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //need to do something
+                        jsonObjectResponse = response;
+                        jsonObjectResponseListener.onResponse(response);
+                        Log.i(SERVER_CONNECTION_TAG, "Get Filtered Lessons");
+                        //Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener()  {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        jsonObjectResponseListener.onError("Error at connection");
+                        Log.e(SERVER_CONNECTION_TAG,"Error at connection to server");
+                        error.printStackTrace();
+                    }
+                }
+        );
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        return this.jsonObjectResponse;
+    }
+    public String signIntoLesson(String studentToken, int lessonId, StringResponseListener stringResponseListener){
+        stringResponse = "";
+        String url = HTTP_REQUEST_ADDRESS+"/sign-into-lesson";
+        StringRequest request  = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //need to do something
+                        //activate responseListener onResponse;
+                        stringResponse = response;
+                        stringResponseListener.onResponse(response);
+                        //Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener()  {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        stringResponseListener.onError("Error at connection");
+                        Log.e(SERVER_CONNECTION_TAG,"Error at connection to server");
+                        error.printStackTrace();
+                    }
+                }
+        )
+        {
+            //Override getParams that pass on the params to the server
+            @Override
+            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("studentToken", studentToken);
+                params.put("lessonId", String.valueOf(lessonId));//need to work with string - check at the server that that came is int/number
+                return params;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        return stringResponse;
+    }
 }

@@ -94,6 +94,7 @@ public class Lesson {
             }
             //create Lesson object with the json values
             lesson = new Lesson(
+                    Integer.parseInt(jsonObject.getString("id")),
                     simpleDateFormat.parse(startDateString),
                     simpleDateFormat.parse(endDateString),
                     Teacher.convertJSONObjectToTeacher(jsonObject.getJSONObject("teacher")),

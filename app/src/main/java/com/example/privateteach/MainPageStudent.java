@@ -1,12 +1,9 @@
 package com.example.privateteach;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,14 +15,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +35,7 @@ public class MainPageStudent extends AppCompatActivity {
     private StudentLessonAdapter studentLessonAdapter;
 
     private Spinner subjectSpinner;
-    private Button filter;
+    private Button filterButton;
     private EditText maxPriceEditText;
     private ListView filteredListView;
 
@@ -93,9 +88,9 @@ public class MainPageStudent extends AppCompatActivity {
         filteredListView = findViewById(R.id.studentFilterListView);
         getAllAvailableLessons();
         setSpinner();
-        filter = findViewById(R.id.filterButton);
-        maxPriceEditText = findViewById(R.id.filterEditText);
-        filter.setOnClickListener(new View.OnClickListener() {
+        filterButton = findViewById(R.id.filterButton);
+        maxPriceEditText = findViewById(R.id.studentFilterEditText);
+        filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 filteredList = new ArrayList<>();
@@ -117,9 +112,23 @@ public class MainPageStudent extends AppCompatActivity {
                         StudentLessonAdapter studentLessonAdapter = new StudentLessonAdapter(MainPageStudent.this,filteredList);
                         filteredListView.setAdapter(studentLessonAdapter);
                         filteredListView.invalidate();
+                        if (filteredList.isEmpty()){
+                            TextView textView = findViewById(R.id.studentFilterTextView);
+                            textView.setText("No Available Lessons");
+                        }
                     }
                 });
 
+            }
+        });
+        filteredListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Lesson lesson = filteredList.get(position);
+                Log.i("Lesson ID",String.valueOf(lesson.getId()));
+                Intent intent = new Intent(MainPageStudent.this,LessonDisplayStudent.class);
+                intent.putExtra("lessonId",lesson.getId());
+                startActivity(intent);
             }
         });
     }
@@ -161,6 +170,10 @@ public class MainPageStudent extends AppCompatActivity {
                 }
                 studentLessonAdapter = new StudentLessonAdapter(MainPageStudent.this,filteredList);
                 filteredListView.setAdapter(studentLessonAdapter);
+                if (filteredList.isEmpty()){
+                    TextView textView = findViewById(R.id.studentFilterTextView);
+                    textView.setText("No Available Lessons");
+                }
             }
         });
     }

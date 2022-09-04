@@ -39,7 +39,7 @@
             android:text="Max Price: "
             />
         <EditText
-            android:id="@+id/filterEditText"
+            android:id="@+id/studentFilterEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="4"
@@ -58,5 +58,14 @@
         android:id="@+id/studentFilterListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        />
+    <TextView
+        android:id="@+id/studentFilterTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:layout_margin="20dp"
+        android:textColor="@color/black"
         />
 </LinearLayout>
