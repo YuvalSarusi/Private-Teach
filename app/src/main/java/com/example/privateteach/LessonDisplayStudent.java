@@ -3,6 +3,7 @@ package com.example.privateteach;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +36,7 @@ public class LessonDisplayStudent extends AppCompatActivity {
     ServerConnection serverConnection;
 
     private int lessonId;
+    private String studentToken;
 
 
     @Override
@@ -46,6 +48,8 @@ public class LessonDisplayStudent extends AppCompatActivity {
 
     private void init(){
         lessonId = getIntent().getIntExtra("lessonId",0);
+        SharedPreferences sharedPreferences = getSharedPreferences(String.valueOf(R.string.sharedPrefName),MODE_PRIVATE);
+        studentToken = sharedPreferences.getString("token","No User");
         serverConnection = new ServerConnection(this);
         serverConnection.getLessonById(lessonId, new ServerConnection.JSONObjectResponseListener() {
             @Override
@@ -83,7 +87,7 @@ public class LessonDisplayStudent extends AppCompatActivity {
         signLessonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                serverConnection.signIntoLesson(lesson.getStudent().getToken(),lessonId, new ServerConnection.StringResponseListener() {
+                serverConnection.signIntoLesson(studentToken,lessonId, new ServerConnection.StringResponseListener() {
                     @Override
                     public void onError(String message) {
                         Log.e("Sign Into Lesson", "Error, "+message);
