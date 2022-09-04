@@ -59,6 +59,7 @@ public class LessonDisplayStudent extends AppCompatActivity {
                 setTextViews();
             }
         });
+        setSignLessonButton();
     }
 
     private void setTextViews(){
