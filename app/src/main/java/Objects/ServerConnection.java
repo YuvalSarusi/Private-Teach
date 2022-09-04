@@ -487,6 +487,7 @@ public class ServerConnection {
         );
         MySingleton.getInstance(context).addToRequestQueue(request);
         return this.jsonObjectResponse;
+
     }
     public String signIntoLesson(String studentToken, int lessonId, StringResponseListener stringResponseListener){
         stringResponse = "";
