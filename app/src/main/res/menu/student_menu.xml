@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/studentMenuSettings"
-        android:title="Settings"
+        android:id="@+id/studentMenuLessons"
+        android:title="Signed Lessons"
         android:orderInCategory="1"
         />
     <item
@@ -11,8 +11,13 @@
         android:orderInCategory="2"
         />
     <item
+        android:id="@+id/studentMenuSettings"
+        android:title="Settings"
+        android:orderInCategory="3"
+        />
+    <item
         android:id="@+id/studentMenuLogOut"
         android:title="Log Out"
-        android:orderInCategory="3"
+        android:orderInCategory="5"
         />
 </menu>

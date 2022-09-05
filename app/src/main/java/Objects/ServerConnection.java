@@ -272,6 +272,70 @@ public class ServerConnection {
         MySingleton.getInstance(context).addToRequestQueue(request);
         return stringResponse;
     }
+    public JSONObject getStudentByToken(String studentToken, JSONObjectResponseListener jsonObjectResponseListener){
+        jsonObjectResponse = new JSONObject();
+        String params = "?token="+studentToken;
+        String url = HTTP_REQUEST_ADDRESS+"/get-student-by-token"+params;
+        JsonObjectRequest request  = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //need to do something
+                        jsonObjectResponse = response;
+                        jsonObjectResponseListener.onResponse(jsonObjectResponse);
+                        Log.i(SERVER_CONNECTION_TAG, "Get Student By Token= "+studentToken+". Got=" +response.toString());
+                        //Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener()  {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        jsonObjectResponseListener.onError("Error at connection");
+                        Log.e(SERVER_CONNECTION_TAG,"Error at connection to server");
+                        error.printStackTrace();
+                    }
+                }
+        );
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        return this.jsonObjectResponse;
+    }
+    public String changeStudentDetails(String studentToken, String fullName, String phone, String email, StringResponseListener stringResponseListener){
+        stringResponse = "";
+        String url = HTTP_REQUEST_ADDRESS+"/change-student-details";
+        StringRequest request  = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //need to do something
+                        //activate responseListener onResponse;
+                        stringResponse = response;
+                        stringResponseListener.onResponse(response);
+                    }
+                },
+                new Response.ErrorListener()  {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        stringResponseListener.onError("Error at connection");
+                        Log.e(SERVER_CONNECTION_TAG,"Error at connection to server");
+                        error.printStackTrace();
+                    }
+                }
+        )
+        {
+            //Override getParams that pass on the params to the server
+            @Override
+            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("token", studentToken);
+                params.put("fullName", fullName);
+                params.put("phone", phone);
+                params.put("email", email);
+                return params;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        return stringResponse;
+    }
 
     //lessons methods
     public String addLesson(Date startDate, Date endDate, String teacherToken, String studentToken, StringResponseListener stringResponseListener){
@@ -323,7 +387,7 @@ public class ServerConnection {
                         //need to do something
                         jsonArrayResponse = response;
                         jsonArrayResponseListener.onResponse(jsonArrayResponse);
-                        Log.i(SERVER_CONNECTION_TAG, "Got All Future Lessons, "+response);
+                        Log.i(SERVER_CONNECTION_TAG, "Got All Teacher Future Lessons, "+response);
                         //Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
                     }
                 },
@@ -350,7 +414,7 @@ public class ServerConnection {
                         //need to do something
                         jsonArrayResponse = response;
                         jsonArrayResponseListener.onResponse(jsonArrayResponse);
-                        Log.i(SERVER_CONNECTION_TAG, "Got All Past Lessons, "+response);
+                        Log.i(SERVER_CONNECTION_TAG, "Got All Teacher Past Lessons, "+response);
                         //Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
                     }
                 },
@@ -524,5 +588,59 @@ public class ServerConnection {
         };
         MySingleton.getInstance(context).addToRequestQueue(request);
         return stringResponse;
+    }
+    public JSONArray getStudentFutureLessons(String studentToken, JSONArrayResponseListener jsonArrayResponseListener){
+        jsonArrayResponse = new JSONArray();
+        String params = "?studentToken="+studentToken;
+        String url = HTTP_REQUEST_ADDRESS+"/get-student-signed-future-lessons"+params;
+        JsonArrayRequest request  = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        //need to do something
+                        jsonArrayResponse = response;
+                        jsonArrayResponseListener.onResponse(jsonArrayResponse);
+                        Log.i(SERVER_CONNECTION_TAG, "Got All Student Signed Future Lessons, "+response);
+                        //Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener()  {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        jsonArrayResponseListener.onError("Error at connection");
+                        Log.e(SERVER_CONNECTION_TAG,"Error at connection to server");
+                        error.printStackTrace();
+                    }
+                }
+        );
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        return this.jsonArrayResponse;
+    }
+    public JSONArray getStudentPastLessons(String studentToken, JSONArrayResponseListener jsonArrayResponseListener){
+        jsonArrayResponse = new JSONArray();
+        String params = "?studentToken="+studentToken;
+        String url = HTTP_REQUEST_ADDRESS+"/get-student-signed-past-lessons"+params;
+        JsonArrayRequest request  = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        //need to do something
+                        jsonArrayResponse = response;
+                        jsonArrayResponseListener.onResponse(jsonArrayResponse);
+                        Log.i(SERVER_CONNECTION_TAG, "Got All Student Signed Past Lessons, "+response);
+                        //Toast.makeText(context, "success", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener()  {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        jsonArrayResponseListener.onError("Error at connection");
+                        Log.e(SERVER_CONNECTION_TAG,"Error at connection to server");
+                        error.printStackTrace();
+                    }
+                }
+        );
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        return this.jsonArrayResponse;
     }
 }

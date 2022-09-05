@@ -74,8 +74,15 @@ public class MainPageStudent extends AppCompatActivity {
             case R.id.studentMenuSearch:
                 intent = new Intent(this,SearchTeacher.class);
                 startActivity(intent);
-            case R.id.teacherMenuSettings:
+                break;
+            case R.id.studentMenuLessons:
+                intent = new Intent(this, StudentSignedLessons.class);
+                startActivity(intent);
+                break;
+            case R.id.studentMenuSettings:
                 //go to settings
+                intent = new Intent(this,StudentSettingsPage.class);
+                startActivity(intent);
                 break;
             default:
         }

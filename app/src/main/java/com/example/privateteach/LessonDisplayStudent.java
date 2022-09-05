@@ -95,27 +95,27 @@ public class LessonDisplayStudent extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if (response.equals("doesn'tExistLesson")){
-                            Toast.makeText(LessonDisplayStudent.this,"ERROR. Lesson Doesn't Exist.\nRefresh the Main Page and try again",Toast.LENGTH_LONG);
+                            Toast.makeText(LessonDisplayStudent.this,"ERROR. Lesson Doesn't Exist.\nRefresh the Main Page and try again",Toast.LENGTH_LONG).show();
                             Log.e("Sign Into Lesson", "Response error: "+response);
                             startActivity(new Intent(LessonDisplayStudent.this,MainPageStudent.class));
                         }
                         else if (response.equals("signedLesson")){
-                            Toast.makeText(LessonDisplayStudent.this,"This Lesson has been capture.\nBack to Main Page and try another lesson. Sorry :(",Toast.LENGTH_LONG);
+                            Toast.makeText(LessonDisplayStudent.this,"This Lesson has been capture.\nBack to Main Page and try another lesson. Sorry :(",Toast.LENGTH_LONG).show();
                             Log.e("Sign Into Lesson", "Response error: "+response);
                             startActivity(new Intent(LessonDisplayStudent.this,MainPageStudent.class));
                         }
                         else if (response.equals("doesn'tExistStudent")){
-                            Toast.makeText(LessonDisplayStudent.this,"Error at User. log out & in and try again",Toast.LENGTH_LONG);
+                            Toast.makeText(LessonDisplayStudent.this,"Error at User. log out & in and try again",Toast.LENGTH_LONG).show();
                             Log.e("Sign Into Lesson", "Response error: "+response);
                             startActivity(new Intent(LessonDisplayStudent.this,MainPageStudent.class));
                         }
                         else if (response.equals("success")){
-                            Toast.makeText(LessonDisplayStudent.this,"Successfully Sign Into Lesson! Good Lick :)",Toast.LENGTH_LONG);
+                            Toast.makeText(LessonDisplayStudent.this,"Successfully Sign Into Lesson! Good Lick :)",Toast.LENGTH_LONG).show();
                             Log.i("Sign Into Lesson", "Success: "+response);
                             startActivity(new Intent(LessonDisplayStudent.this,MainPageStudent.class));
                         }
                         else{
-                            Toast.makeText(LessonDisplayStudent.this,"Error At Signing",Toast.LENGTH_LONG);
+                            Toast.makeText(LessonDisplayStudent.this,"Error At Signing",Toast.LENGTH_LONG).show();
                             Log.e("Sign Into Lesson", "Success: "+response);
                         }
                     }

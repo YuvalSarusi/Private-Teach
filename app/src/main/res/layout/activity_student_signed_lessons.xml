@@ -4,33 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainPageTeacher"
+    tools:context=".StudentSignedLessons"
     android:orientation="vertical"
     android:layout_margin="10dp"
-    android:weightSum="10"
     >
 
     <TextView
-        android:id="@+id/teacherHomeTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/teacherHomeTitle"
-        android:textSize="40dp"
+        android:textSize="35dp"
+        android:text="Your Signed Lessons"
+        android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@color/black"
-        android:layout_marginBottom="100dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="70dp"
         />
-    <Button
-        android:id="@+id/teacherAddLesson"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Lesson"
-        android:textSize="20dp"
-        android:layout_gravity="right"
-        android:backgroundTint="@color/light_blue"
-        android:layout_marginBottom="10sp"
-        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,9 +39,10 @@
                 android:textSize="20dp"
                 android:gravity="center"
                 android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
                 />
             <ListView
-                android:id="@+id/teacherPastLessonList"
+                android:id="@+id/studentSignedPastLessons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
@@ -70,9 +61,10 @@
                 android:gravity="center"
                 android:textSize="20dp"
                 android:textColor="@color/black"
+                android:layout_marginBottom="20dp"
                 />
             <ListView
-                android:id="@+id/teacherFutureLessonList"
+                android:id="@+id/studentSignedFutureLessons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
