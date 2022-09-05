@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StudentSettingsPage"
+    tools:context=".TeacherSettingsPage"
     android:orientation="vertical"
-    android:layout_margin="10dp"
     >
+
 
     <TextView
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
         />
 
     <TextView
-        android:id="@+id/studentSettingsUsername"
+        android:id="@+id/teacherSettingsUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Username"
@@ -41,7 +41,7 @@
         android:layout_marginLeft="30dp"
         >
         <TextView
-            android:id="@+id/studentSettingsFullNameText"
+            android:id="@+id/teacherSettingsFullNameText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -50,7 +50,7 @@
             />
 
         <EditText
-            android:id="@+id/studentSettingsFullNameEdit"
+            android:id="@+id/teacherSettingsFullNameEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -67,7 +67,7 @@
         android:layout_marginLeft="30dp"
         >
         <TextView
-            android:id="@+id/studentSettingsPhoneText"
+            android:id="@+id/teacherSettingsPhoneText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -76,7 +76,7 @@
             />
 
         <EditText
-            android:id="@+id/studentSettingsPhoneEdit"
+            android:id="@+id/teacherSettingsPhoneEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -92,7 +92,7 @@
         android:layout_marginLeft="30dp"
         >
         <TextView
-            android:id="@+id/studentSettingsEmailText"
+            android:id="@+id/teacherSettingsEmailText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -101,7 +101,7 @@
             />
 
         <EditText
-            android:id="@+id/studentSettingsEmailEdit"
+            android:id="@+id/teacherSettingsEmailEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="5"
@@ -113,10 +113,45 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        >
+        <TextView
+            android:id="@+id/teacherSettingsPriceText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="Price"
+            android:textSize="25dp"
+            />
+
+        <EditText
+            android:id="@+id/teacherSettingsPriceEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:textSize="25dp"
+            android:inputType="numberDecimal"
+            />
+    </LinearLayout>
+
+
+    <Spinner
+        android:id="@+id/teacherSettingsSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
         <Button
-            android:id="@+id/studentSettingsSave"
+            android:id="@+id/teacherSettingsSave"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="40dp"
@@ -126,7 +161,7 @@
             android:layout_margin="7dp"
             />
         <Button
-            android:id="@+id/studentSettingsBack"
+            android:id="@+id/teacherSettingsBack"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="40dp"
@@ -136,5 +171,6 @@
             android:layout_margin="7dp"
             />
     </LinearLayout>
+
 
 </LinearLayout>

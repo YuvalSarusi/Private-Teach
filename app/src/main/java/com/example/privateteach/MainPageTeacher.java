@@ -62,6 +62,7 @@ public class MainPageTeacher extends AppCompatActivity{
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.teacherMenuLogOut:
@@ -70,15 +71,18 @@ public class MainPageTeacher extends AppCompatActivity{
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 editor.commit();
-                Intent intent = new Intent(this, MainActivity.class);
+                intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-                return true;
+               break;
             case R.id.teacherMenuSettings:
                 //go to settings
-                return true;
+                intent = new Intent(this,TeacherSettingsPage.class);
+                startActivity(intent);
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return true;
     }
 
     private void init(){

@@ -205,6 +205,47 @@ public class ServerConnection {
         MySingleton.getInstance(context).addToRequestQueue(request);
         return this.jsonArrayResponse;
     }
+    public String changeTeacherDetails(String studentToken, String fullName, String phone, String email, int price, String subject, StringResponseListener stringResponseListener){
+        stringResponse = "";
+        String url = HTTP_REQUEST_ADDRESS+"/change-teacher-details";
+        StringRequest request  = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //need to do something
+                        //activate responseListener onResponse;
+                        stringResponse = response;
+                        stringResponseListener.onResponse(response);
+                    }
+                },
+                new Response.ErrorListener()  {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        stringResponseListener.onError("Error at connection");
+                        Log.e(SERVER_CONNECTION_TAG,"Error at connection to server");
+                        error.printStackTrace();
+                    }
+                }
+        )
+        {
+            //Override getParams that pass on the params to the server
+            @Override
+            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("token", studentToken);
+                params.put("fullName", fullName);
+                params.put("phone", phone);
+                params.put("email", email);
+                params.put("price",String.valueOf(price));
+                params.put("subject",subject);
+                return params;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        return stringResponse;
+    }
+
+
 
     //student methods
     public String createStudent(Student student, StringResponseListener stringResponseListener){
