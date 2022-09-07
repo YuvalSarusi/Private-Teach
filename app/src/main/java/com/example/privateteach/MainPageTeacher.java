@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,7 +30,7 @@ import Objects.Student;
 import Objects.Teacher;
 import Objects.TeacherLessonAdapter;
 
-public class MainPageTeacher extends AppCompatActivity{
+public class MainPageTeacher extends AppCompatActivity {
 
     private ServerConnection serverConnection;
 
@@ -126,6 +127,27 @@ public class MainPageTeacher extends AppCompatActivity{
         });
         //get lessons data from server and put it in list
         getLessonsData();
+
+        futureLessonList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Lesson lesson = futureLessons.get(position);
+                Log.i("Lesson ID",String.valueOf(lesson.getId()));
+                Intent intent = new Intent(MainPageTeacher.this,LessonDisplayTeacher.class);
+                intent.putExtra("lessonId",lesson.getId());
+                startActivity(intent);
+            }
+        });
+        pastLessonList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Lesson lesson = pastLessons.get(position);
+                Log.i("Lesson ID",String.valueOf(lesson.getId()));
+                Intent intent = new Intent(MainPageTeacher.this,LessonDisplayTeacher.class);
+                intent.putExtra("lessonId",lesson.getId());
+                startActivity(intent);
+            }
+        });
     }
     private void getLessonsData(){
         pastLessons = new ArrayList<>();
@@ -169,5 +191,7 @@ public class MainPageTeacher extends AppCompatActivity{
             }
         });
     }
+
+
 
 }

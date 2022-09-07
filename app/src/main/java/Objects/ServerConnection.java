@@ -244,7 +244,41 @@ public class ServerConnection {
         MySingleton.getInstance(context).addToRequestQueue(request);
         return stringResponse;
     }
-
+    public String deleteLesson(String teacherToken, int lessonId, StringResponseListener stringResponseListener){
+        stringResponse = "";
+        String url = HTTP_REQUEST_ADDRESS+"/delete-lesson";
+        StringRequest request  = new StringRequest(Request.Method.DELETE, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //need to do something
+                        //activate responseListener onResponse;
+                        stringResponse = response;
+                        stringResponseListener.onResponse(response);
+                    }
+                },
+                new Response.ErrorListener()  {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        stringResponseListener.onError("Error at connection");
+                        Log.e(SERVER_CONNECTION_TAG,"Error at connection to server");
+                        error.printStackTrace();
+                    }
+                }
+        )
+        {
+            //Override getParams that pass on the params to the server
+            @Override
+            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("token", teacherToken);
+                params.put("id", String.valueOf(lessonId));
+                return params;
+            }
+        };
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        return stringResponse;
+    }
 
 
     //student methods

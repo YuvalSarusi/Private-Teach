@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LessonDisplayStudent"
+    tools:context=".LessonDisplayTeacher"
     android:orientation="vertical"
-    android:layout_margin="10dp"
     >
+
 
     <TextView
         android:layout_marginBottom="30dp"
         android:layout_marginTop="40dp"
-        android:id="@+id/lessonDisplayStudentUsername"
+        android:id="@+id/lessonDisplayTeacherUsername"
         android:layout_width= "match_parent"
         android:layout_height="wrap_content"
-        android:text="Teacher Username"
+        android:text="Student Username"
         android:textSize="30dp"
         android:gravity="center"
         android:textColor="@color/black"
@@ -28,7 +28,7 @@
         android:layout_marginTop="10dp"
         >
         <TextView
-            android:id="@+id/lessonDisplayStudentStart"
+            android:id="@+id/lessonDisplayTeacherStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30dp"
@@ -36,48 +36,14 @@
             android:gravity="center"
             android:layout_weight="5"
             android:layout_marginRight="10dp"
-
             android:textColor="@color/black"
             />
         <TextView
-            android:id="@+id/lessonDisplayStudentEnd"
+            android:id="@+id/lessonDisplayTeacherEnd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30dp"
             android:text="End Date"
-            android:gravity="center"
-            android:layout_weight="5"
-            android:layout_marginLeft="10dp"
-
-            android:textColor="@color/black"
-            />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="10dp"
-        >
-        <TextView
-            android:id="@+id/lessonDisplayStudentPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="Price"
-            android:gravity="center"
-            android:layout_weight="5"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:id="@+id/lessonDisplayStudentSubject"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="Subject"
             android:gravity="center"
             android:layout_weight="5"
             android:layout_marginLeft="10dp"
@@ -95,30 +61,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:text="Do You Want to Sign to this Lesson?"
+            android:text="Do You Want Delete This Lesson? "
             android:gravity="center"
             android:layout_weight="5"
             android:textColor="@color/black"
             />
-       <Button
-           android:id="@+id/lessonDisplayStudentButton"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_weight="5"
-           android:gravity="center"
-           android:layout_gravity="center"
-           android:layout_marginLeft="20dp"
-           android:layout_marginRight="20dp"
-           android:text="Sign to Lesson"
-           />
+        <Button
+            android:id="@+id/lessonDisplayTeacherButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Delete Lesson"
+            />
     </LinearLayout>
     <TextView
-        android:id="@+id/lessonDisplayStudentTeacher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lesson can be deleted only if it clear lesson"
+        android:textSize="15dp"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/lessonDisplayTeacherStudent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show Teacher Profile"
+        android:text="Show Student Profile"
         android:layout_margin="20dp"
         android:textSize="20dp"
         android:clickable="true"
         />
+
 </LinearLayout>
