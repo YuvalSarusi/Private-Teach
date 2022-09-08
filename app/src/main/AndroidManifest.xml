@@ -13,6 +13,12 @@
         android:theme="@style/Theme.PrivateTeach"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".TeacherDisplay"
+            android:exported="false" />
+        <activity
+            android:name=".StudentDisplay"
+            android:exported="false" />
+        <activity
             android:name=".LessonDisplayTeacher"
             android:exported="false" />
         <activity

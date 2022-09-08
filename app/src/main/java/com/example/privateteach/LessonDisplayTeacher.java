@@ -68,7 +68,7 @@ public class LessonDisplayTeacher extends AppCompatActivity {
     private void setTextViews(){
         endTextView = findViewById(R.id.lessonDisplayTeacherEnd);
         startTextView = findViewById(R.id.lessonDisplayTeacherStart);
-        studentTextView = findViewById(R.id.lessonDisplayTeacherStudent);;
+        studentTextView = findViewById(R.id.lessonDisplayTeacherShowStudent);
         usernameTextView = findViewById(R.id.lessonDisplayTeacherUsername);
 
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -80,11 +80,20 @@ public class LessonDisplayTeacher extends AppCompatActivity {
         else{
             usernameTextView.setText(lesson.getStudent().getUsername());
         }
+        studentTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LessonDisplayTeacher.this,StudentDisplay.class);
+                intent.putExtra("studentUsername",lesson.getStudent().getUsername());
+                startActivity(intent);
+            }
+        });
     }
 
     private void setSignLessonButton(){
-        deleteLessonButton = findViewById(R.id.lessonDisplayStudentButton);
-        if (lesson.getStudent() != null){
+        deleteLessonButton = findViewById(R.id.lessonDisplayTeacherButton);
+        if (lesson.getStudent() == null){
+            studentTextView.setEnabled(false);
             deleteLessonButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

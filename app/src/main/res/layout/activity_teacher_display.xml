@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TeacherDisplay"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    >
+
+    <TextView
+        android:id="@+id/teacherDisplayUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Teacher Username"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        />
+    <TextView
+        android:id="@+id/teacherDisplayFullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Teacher FullName"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        />
+    <TextView
+        android:id="@+id/teacherDisplayPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Teacher Phone Number"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        />
+    <TextView
+        android:id="@+id/teacherDisplayEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Teacher Email"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        />
+
+    <TextView
+        android:id="@+id/teacherDisplayPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Teacher Price"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        />
+    <TextView
+        android:id="@+id/teacherDisplaySubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Teacher Subject"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        />
+
+    <TextView
+        android:id="@+id/teacherDisplayListTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Available Lesson of"
+        android:textColor="@color/black"
+        android:gravity="left"
+        android:textSize="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        />
+    <ListView
+        android:id="@+id/teacherDisplayList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+</LinearLayout>

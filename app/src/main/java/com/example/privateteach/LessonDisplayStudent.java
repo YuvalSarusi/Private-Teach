@@ -80,6 +80,14 @@ public class LessonDisplayStudent extends AppCompatActivity {
         priceTextView.setText(String.valueOf(lesson.getTeacher().getPrice()));
         subjectTextView.setText(lesson.getTeacher().getSubject());
         usernameTextView.setText(lesson.getTeacher().getUsername());
+        teacherTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LessonDisplayStudent.this,TeacherDisplay.class);
+                intent.putExtra("teacherUsername",lesson.getTeacher().getUsername());
+                startActivity(intent);
+            }
+        });
     }
 
     private void setSignLessonButton(){
