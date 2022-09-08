@@ -84,6 +84,10 @@ public class StudentSettingsPage extends AppCompatActivity {
         phoneEditText.setHint(student.getPhoneNumber());
         emailEditText.setHint(student.getEmail());
 
+        fullName = student.getFullName();
+        phoneNumber = student.getPhoneNumber();
+        email = student.getEmail();
+
         emailEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

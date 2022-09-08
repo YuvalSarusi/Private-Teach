@@ -53,6 +53,7 @@ public class TeacherSettingsPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_settings_page);
+        init();
     }
 
 
@@ -82,17 +83,25 @@ public class TeacherSettingsPage extends AppCompatActivity {
     }
 
     private void setTextView(){
-        usernameTextView = findViewById(R.id.studentSettingsUsername);
+        usernameTextView = findViewById(R.id.teacherSettingsUsername);
         usernameTextView.setText(teacher.getUsername());
     }
     private void setEditTexts(){
-        fullNameEditText = findViewById(R.id.studentSettingsFullNameEdit);
-        phoneEditText = findViewById(R.id.studentSettingsPhoneEdit);
-        emailEditText = findViewById(R.id.studentSettingsEmailEdit);
+        fullNameEditText = findViewById(R.id.teacherSettingsFullNameEdit);
+        phoneEditText = findViewById(R.id.teacherSettingsPhoneEdit);
+        emailEditText = findViewById(R.id.teacherSettingsEmailEdit);
+        priceEditText = findViewById(R.id.teacherSettingsPriceEdit);
+
 
         fullNameEditText.setHint(teacher.getFullName());
         phoneEditText.setHint(teacher.getPhoneNumber());
         emailEditText.setHint(teacher.getEmail());
+        priceEditText.setHint(String.valueOf(teacher.getPrice()));
+
+        fullName = teacher.getFullName();
+        phoneNumber = teacher.getPhoneNumber();
+        email = teacher.getEmail();
+        price = teacher.getPrice();
 
         emailEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -176,7 +185,7 @@ public class TeacherSettingsPage extends AppCompatActivity {
     }
 
     private void setSpinner(){
-        subjectSpinner = findViewById(R.id.teacherSubjectSpinner);
+        subjectSpinner = findViewById(R.id.teacherSettingsSpinner);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.subjects)
         );
@@ -197,8 +206,8 @@ public class TeacherSettingsPage extends AppCompatActivity {
     }
 
     private void setButtons(){
-        saveButton = findViewById(R.id.studentSettingsSave);
-        backButton = findViewById(R.id.studentSettingsBack);
+        saveButton = findViewById(R.id.teacherSettingsSave);
+        backButton = findViewById(R.id.teacherSettingsBack);
         saveButton.setEnabled(false);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
