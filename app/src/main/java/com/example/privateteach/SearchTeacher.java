@@ -2,9 +2,11 @@ package com.example.privateteach;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -68,6 +70,14 @@ public class SearchTeacher extends AppCompatActivity implements TeacherSelectDia
                 teacherSelectDialog.show(getSupportFragmentManager(),"searchTeacher");
             }
         });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SearchTeacher.this,TeacherDisplay.class);
+                intent.putExtra("teacherUsername",teacherList.get(position).getUsername());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -93,4 +103,5 @@ public class SearchTeacher extends AppCompatActivity implements TeacherSelectDia
             }
         });
     }
+
 }

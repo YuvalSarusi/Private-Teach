@@ -20,6 +20,8 @@ import java.util.List;
 
 import Objects.Lesson;
 import Objects.ServerConnection;
+import Objects.Student;
+import Objects.StudentLessonAdapter;
 import Objects.Teacher;
 import Objects.TeacherLessonAdapter;
 
@@ -110,8 +112,8 @@ public class TeacherDisplay extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-                TeacherLessonAdapter teacherLessonAdapter = new TeacherLessonAdapter(TeacherDisplay.this,lessons);
-                listView.setAdapter(teacherLessonAdapter);
+                StudentLessonAdapter studentLessonAdapter = new StudentLessonAdapter(TeacherDisplay.this,lessons);
+                listView.setAdapter(studentLessonAdapter);
             }
         });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
